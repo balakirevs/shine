@@ -14,7 +14,12 @@ gem 'devise'
 gem 'bower-rails'
 gem 'faker'
 
+gem 'web-console', '~> 2.0', group: :development
+
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
+  gem "rspec-rails", '~> 3.0'
+  gem 'poltergeist'
+  gem 'database_cleaner'
+  gem 'teaspoon-jasmine'
 end

@@ -12,7 +12,6 @@ app.controller("CustomerSearchController", [
       if (searchTerm.length < 3) {
         return;
       }
-      // ... rest of the function
       $http.get("/customers.json",  
                 { "params": { "keywords": searchTerm, "page": page } }
       ).success(
