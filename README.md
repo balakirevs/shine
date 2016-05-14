@@ -5,6 +5,7 @@ $ cd ~/workspace
 $ git@github.com:balakirevs/shine.git
 $ cd shine
 $ bundle install
+$ bundle exec rake bower:install
 
 $ psql postgres
 postgres> createuser --createdb --login -P shine
