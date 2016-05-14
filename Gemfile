@@ -10,6 +10,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'puma'
 gem 'devise'
 gem 'bower-rails'
 gem 'faker'
@@ -23,5 +24,6 @@ group :development, :test do
   gem "rspec-rails", '~> 3.0'
   gem 'poltergeist'
   gem 'database_cleaner'
+  gem 'factory_girl_rails'
   gem 'teaspoon-jasmine'
 end

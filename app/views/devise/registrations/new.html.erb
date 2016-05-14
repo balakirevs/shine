@@ -10,7 +10,7 @@
 
   <div class="form-group">
     <%= f.label :password %>
-    <% if @minimum_password_length %>
+    <% if @validatable %>
     <em>(<%= @minimum_password_length %> characters minimum)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
