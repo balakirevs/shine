@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.2
--- Dumped by pg_dump version 9.5.2
+-- Dumped from database version 9.5.3
+-- Dumped by pg_dump version 9.5.3
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -27,7 +27,32 @@ CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
+--
+-- Name: hstore; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
+
+
 SET search_path = public, pg_catalog;
+
+--
+-- Name: customer_status; Type: TYPE; Schema: public; Owner: -
+--
+
+CREATE TYPE customer_status AS ENUM (
+    'signed_up',
+    'verified',
+    'inactive'
+);
+
 
 --
 -- Name: refresh_customer_details(); Type: FUNCTION; Schema: public; Owner: -
@@ -92,7 +117,10 @@ CREATE TABLE customers (
     email character varying NOT NULL,
     username character varying NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    insights json DEFAULT '{}'::json,
+    status customer_status DEFAULT 'signed_up'::customer_status NOT NULL,
+    bio text
 );
 
 
@@ -264,6 +292,8 @@ CREATE TABLE users (
     last_sign_in_ip inet,
     created_at timestamp without time zone NOT NULL,
     updated_at timestamp without time zone NOT NULL,
+    roles character varying[] DEFAULT '{}'::character varying[],
+    settings hstore DEFAULT ''::hstore,
     CONSTRAINT email_must_be_company_email CHECK (((email)::text ~* '^[^@]+@example\.com'::text))
 );
 
@@ -385,6 +415,13 @@ CREATE UNIQUE INDEX customer_details_customer_id ON customer_details USING btree
 
 
 --
+-- Name: customers_bio_index; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX customers_bio_index ON customers USING gin (to_tsvector('english'::regconfig, bio));
+
+
+--
 -- Name: customers_lower_email; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -487,4 +524,14 @@ INSERT INTO schema_migrations (version) VALUES ('20160513205548');
 INSERT INTO schema_migrations (version) VALUES ('20160513205936');
 
 INSERT INTO schema_migrations (version) VALUES ('20160513210756');
+
+INSERT INTO schema_migrations (version) VALUES ('20160514110848');
+
+INSERT INTO schema_migrations (version) VALUES ('20160514110940');
+
+INSERT INTO schema_migrations (version) VALUES ('20160514111106');
+
+INSERT INTO schema_migrations (version) VALUES ('20160514111334');
+
+INSERT INTO schema_migrations (version) VALUES ('20160514111441');
 

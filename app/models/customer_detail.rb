@@ -1,4 +1,5 @@
 class CustomerDetail < ActiveRecord::Base
+
   self.primary_key = 'customer_id'
 
   def credit_card_token
@@ -21,6 +22,7 @@ class CustomerDetail < ActiveRecord::Base
   end
 
 private
+
   def address_attributes(params, type)
     {
        street: params["#{type}_street"],

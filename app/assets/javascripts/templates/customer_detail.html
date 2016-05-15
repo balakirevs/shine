@@ -1,10 +1,22 @@
+<header>
+  <customer-summary cust="customer"></customer-summary>
+  <hr>
+</header>
+<section>
+  <uib-alert ng-show="alert"
+         type="{{alert.type}}" 
+         close="closeAlert()">
+    {{alert.message}}
+  </uib-alert>
+</section>
 <form novalidate name="form"><div class="row">
-    
+
   <div class="col-md-6">
 
     <article class="panel panel-primary">
       <header class="panel-heading">
         <h1 class="h3">
+          <i class="glyphicon glyphicon-user"></i> 
           Customer
         </h1>
       </header>
@@ -68,6 +80,7 @@
     <article class="panel panel-default">
       <header class="panel-heading">
         <h2 class="h4">
+          <i class="glyphicon glyphicon-envelope"></i> 
           Shipping Address
         </h2>
       </header>
@@ -84,7 +97,8 @@
             </p>
           </div>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-xs-12">
+
               <div class="form-group">
                 <label class="sr-only" for="city">City</label>
                 <input type="text" class="form-control" required
@@ -94,7 +108,8 @@
                 </p>
               </div>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-2 col-xs-4">
+
               <div class="form-group">
                 <label class="sr-only" for="state">State</label>
                 <input type="text" class="form-control" 
@@ -106,7 +121,8 @@
                 </p>
               </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 col-xs-8">
+
               <div class="form-group has-feedback" ng-class="{
                   'has-error': form.shippingZip.$invalid && form.shippingZip.$dirty, 
                 'has-success': form.shippingZip.$valid   && form.shippingZip.$touched
@@ -130,7 +146,8 @@
 
       <header class="panel-heading">
         <h2 class="h4">
-          Billing Info
+          <i class="glyphicon glyphicon-credit-card"></i> 
+          Billing Info 
         </h2>
       </header>
       <section class="panel-body">
@@ -178,11 +195,13 @@
           <header>
             <h1 class="h5">
               Billing Address
-              <small>
-                <input type="checkbox" 
-                       ng-model="customer.billingSameAsShipping"> 
-                Same as shipping?
-              </small>
+              <div class="visible-xs-block visible-sm-inline visible-md-inline visible-lg-inline">
+                <small>
+                  <input type="checkbox" 
+                  ng-model="customer.billingSameAsShipping"> 
+                  Same as shipping?
+                </small>
+              </div>
             </h1>
           </header>
           <form ng-if="!customer.billingSameAsShipping">
@@ -235,9 +254,15 @@
       </section>
     </article>
     <div class="text-right">
+      <button ng-click="deactivate()" 
+              class="btn btn-lg btn-danger">
+        <i class="glyphicon glyphicon-ban-circle"></i>
+        Deactivate Customer
+      </button>
       <button ng-click="save()" 
               class="btn btn-lg btn-primary" 
               ng-disabled="form.$invalid || form.$pristine">
+        <i class="glyphicon glyphicon-save"></i>
         Save Changes
       </button>
     </div>

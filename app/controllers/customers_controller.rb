@@ -1,7 +1,7 @@
 class CustomersController < ApplicationController
   PAGE_SIZE = 10
 
-  def index   
+  def index
     @page = (params[:page] || 0).to_i
     if params[:keywords].present?
       @keywords = params[:keywords]
@@ -22,14 +22,12 @@ class CustomersController < ApplicationController
 
   def show
     customer_detail = CustomerDetail.find(params[:id])
-    sleep 5
     respond_to do |format|
       format.json { render json: customer_detail }
     end
   end
-
   def update
-    customer_detail = CustomerDetail.find(params[:id]) 
+    customer_detail = CustomerDetail.find(params[:id])
     customer_detail.update(params)
     head :ok
   end

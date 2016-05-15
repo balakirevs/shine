@@ -2,7 +2,6 @@ class FakeBillingController < ApplicationController
   skip_before_action :authenticate_user!
   def show
     if params[:cardholder_id]
-      sleep 3
       render json: {
                lastFour: Faker::Business.credit_card_number[-4..-1],
                cardType: Faker::Business.credit_card_type,

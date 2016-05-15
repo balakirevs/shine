@@ -1,0 +1,18 @@
+<div class="clearfix">
+  <h3 class="pull-right">
+    <small class="text-uppercase">Joined</small>
+    {{ cust.created_at | date }}
+    {{ cust.joined_at | date }}
+  </h3>
+  <h2 class="h3">
+    {{ cust.first_name | name }} {{ cust.last_name | name }}
+    <small>{{ cust.username }}</small>
+  </h2>
+  <div class="pull-right" ng-if="viewDetailsFunction">
+    <button class="btn btn-small btn-primary"
+            ng-click="viewDetailsFunction(cust)">
+      View Details…
+    </button>
+  </div>
+  <h4>{{ cust.email }}</h4>
+</div>
