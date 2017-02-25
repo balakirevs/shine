@@ -20,7 +20,7 @@ RSpec.configure do |config|
   config.screenshots_dir = "#{::Rails.root}/spec/screenshots"
   config.include(EasyScreenshots, type: :feature)
   config.include(FactoryGirl::Syntax::Methods)
-  config.include(Devise::TestHelpers, type: :controller)
+  config.include Devise::Test::ControllerHelpers, type: :controller
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)
