@@ -15,6 +15,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'webpacker', '~> 2.0'
 gem 'foreman', '~> 0.84'
 gem 'devise', '~> 4.3'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
