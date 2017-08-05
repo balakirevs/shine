@@ -5,5 +5,6 @@
   "glyphicons-halflings-regular.svg": "http://0.0.0.0:8081/packs/glyphicons-halflings-regular.svg",
   "glyphicons-halflings-regular.ttf": "http://0.0.0.0:8081/packs/glyphicons-halflings-regular.ttf",
   "glyphicons-halflings-regular.woff": "http://0.0.0.0:8081/packs/glyphicons-halflings-regular.woff",
-  "glyphicons-halflings-regular.woff2": "http://0.0.0.0:8081/packs/glyphicons-halflings-regular.woff2"
+  "glyphicons-halflings-regular.woff2": "http://0.0.0.0:8081/packs/glyphicons-halflings-regular.woff2",
+  "hello_angular.js": "http://0.0.0.0:8081/packs/hello_angular.js"
 }
