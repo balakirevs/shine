@@ -1,31 +1,27 @@
 source 'https://rubygems.org'
 
-ruby '2.4.1'
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
 
-gem 'rails', '4.2.9'
-gem 'pg'
-gem 'sass-rails'
+gem 'rails', '~> 5.1.3'
+gem 'pg', '~> 0.18'
+gem 'puma', '~> 3.7'
+gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails'
-gem 'jquery-rails'
-gem 'jbuilder'
-gem 'sdoc'
-gem 'puma'
-gem 'devise'
-gem 'bower-rails'
-gem 'faker'
-gem 'angular-rails-templates'
-gem 'sprockets'
-gem 'brakeman'
-
-gem 'web-console', '~> 2.0', group: :development
+gem 'coffee-rails', '~> 4.2'
+gem 'jbuilder', '~> 2.5'
+gem 'webpacker', '~> 2.0'
+gem 'foreman'
 
 group :development, :test do
-  gem 'byebug'
-  gem "rspec-rails"
-  gem 'poltergeist'
-  gem 'database_cleaner'
-  gem 'factory_girl_rails'
-  gem 'teaspoon-jasmine'
-  gem 'phantomjs', require: 'phantomjs/poltergeist'
+  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
+
+group :development do
+  gem 'web-console', '>= 3.3.0'
+  gem 'listen', '>= 3.0.5', '< 3.2'
+end
+
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

@@ -1,8 +1,0 @@
-asset 'bootstrap-sass-official'
-asset 'angular-mocks'
-asset 'angular-route'
-asset 'angular-resource'
-asset 'angular-messages'
-asset 'angular-bootstrap'
-asset 'angular', '~> 1.5'
-resolution 'angular', '1.5'

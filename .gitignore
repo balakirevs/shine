@@ -25,4 +25,5 @@ doc/
 .rvmrc
 .ruby-*
 .secret
-.zeus.sock
+.zeus.sock/public/packs
+/node_modules
