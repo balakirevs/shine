@@ -36,6 +36,6 @@ $ bundle exec rake teaspoon
 * **@angular:** 4.3.3
 * **@bootstrap:** 3.3.7
 * **@node:** 6.10.2
-* **@webpack:** 2.6.1
+* **@webpack:** 3.4.1
 * **@devise:** 4.3.0
 * **@karma:** 1.7.0
