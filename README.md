@@ -23,7 +23,7 @@ $ foreman start
 ```
 ## Run Tests
 ```
-$ bundle exec rspec spec
+$ bin/rails spec
 $ bundle exec rake teaspoon
 ```
 
