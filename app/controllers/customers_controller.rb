@@ -13,5 +13,11 @@ class CustomersController < ApplicationController
     else
       @customers = []
     end
+    respond_to do |format|
+      format.html {}
+      format.json {
+        render json: { customers: @customers }
+      }
+    end
   end
 end

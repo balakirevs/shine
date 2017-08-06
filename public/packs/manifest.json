@@ -1,6 +1,7 @@
 {
   "application.css": "http://0.0.0.0:8081/packs/application.css",
   "application.js": "http://0.0.0.0:8081/packs/application.js",
+  "customers.js": "http://0.0.0.0:8081/packs/customers.js",
   "glyphicons-halflings-regular.eot": "http://0.0.0.0:8081/packs/glyphicons-halflings-regular.eot",
   "glyphicons-halflings-regular.svg": "http://0.0.0.0:8081/packs/glyphicons-halflings-regular.svg",
   "glyphicons-halflings-regular.ttf": "http://0.0.0.0:8081/packs/glyphicons-halflings-regular.ttf",
