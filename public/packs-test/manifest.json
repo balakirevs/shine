@@ -1,0 +1,11 @@
+{
+  "application.css": "/packs-test/application.css",
+  "application.js": "/packs-test/application.js",
+  "customers.js": "/packs-test/customers.js",
+  "glyphicons-halflings-regular.eot": "/packs-test/glyphicons-halflings-regular.eot",
+  "glyphicons-halflings-regular.svg": "/packs-test/glyphicons-halflings-regular.svg",
+  "glyphicons-halflings-regular.ttf": "/packs-test/glyphicons-halflings-regular.ttf",
+  "glyphicons-halflings-regular.woff": "/packs-test/glyphicons-halflings-regular.woff",
+  "glyphicons-halflings-regular.woff2": "/packs-test/glyphicons-halflings-regular.woff2",
+  "hello_angular.js": "/packs-test/hello_angular.js"
+}
