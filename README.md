@@ -25,7 +25,8 @@ $ foreman start
 ```
 $ bin/rails spec
 $ SKIP_WEBPACK=true bin/rails spec  # avoid running Webpack 
-$ bundle exec rake teaspoon
+$ rake karma
+$ rake features
 ```
 
 ## Dependencies
