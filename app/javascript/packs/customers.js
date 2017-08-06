@@ -45,28 +45,22 @@ var RESULTS = [
 ];
 
 var CustomerSearchComponent = Component({
-    selector: "shine-customer-search",
-    template: '\
+  selector: "shine-customer-search",
+  template: '\
 <header> \
   <h1 class="h2">Customer Search</h1> \
 </header> \
 <section class="search-form"> \
   <form> \
-    <div class="input-group input-group-lg"> \
-      <label for="keywords" class="sr-only">Keywords></label> \
-      <input type="text" id="keywords" name="keywords" \
-             placeholder="First Name, Last Name, or Email Address"\
-             class="form-control input-lg" \
-             bind-ngModel="keywords"> \
-      <span class="input-group-btn"> \
-        <input type="submit" value="Find Customers"\
-               class="btn btn-primary btn-lg"\
-               on-click="search()"> \
-      </span> \
-    </div> \
+    <label for="keywords" class="sr-only">Keywords></label> \
+    <input type="text" id="keywords" name="keywords" \
+           placeholder="First Name, Last Name, or Email Address"\
+           bind-ngModel="keywords" \
+           on-ngModelChange="search($event)" \
+           class="form-control input-lg">\
   </form> \
 </section> \
-<section class="search-results"> \
+<section class="search-results" *ngIf="customers"> \
   <header> \
     <h1 class="h3">Results</h1> \
   </header> \
@@ -95,15 +89,19 @@ var CustomerSearchComponent = Component({
       this.keywords  = "";
     }
   ],
-  search: function() {
-    var self = this;                                // (1)
-    self.http.get(                                  // (2)
-      "/customers.json?keywords=" + self.keywords   // (3)
+  search: function($event) {
+    var self = this;
+    self.keywords = $event;
+    if (self.keywords.length < 3) {
+      return;
+    }
+    self.http.get(
+      "/customers.json?keywords=" + self.keywords
     ).subscribe(
-      function(response) {                          // (4)
-        self.customers = response.json().customers; // (5)
+      function(response) {
+        self.customers = response.json().customers;
       },
-      function(response) {                          // (6)
+      function(response) {
         window.alert(response);
       }
     );
