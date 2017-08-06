@@ -18,7 +18,9 @@ gem 'uglifier', '>= 1.3.0'
 gem 'webpacker', '~> 2.0'
 
 group :development, :test do
+  gem 'database_cleaner'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'poltergeist'
   gem 'rspec-rails', '~> 3.4'
 end
 
