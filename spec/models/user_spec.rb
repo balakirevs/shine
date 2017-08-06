@@ -1,4 +1,7 @@
-describe User do
+require 'rails_helper'
+require 'support/violate_check_constraint_matcher'
+
+describe User, type: :model do
   describe 'email' do
     let(:user) do
       User.create!(email: 'foo@example.com',
