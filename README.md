@@ -26,7 +26,7 @@ $ foreman start
 $ bin/rails spec
 $ SKIP_WEBPACK=true bin/rails spec  # avoid running Webpack 
 $ rake karma
-$ rake features
+$ rake spec:features
 ```
 
 ## Dependencies
