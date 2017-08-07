@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   root to: 'dashboard#index'
   get 'customers/ng',                to: 'customers#ng'
   get 'customers/ng/*angular_route', to: 'customers#ng'
-  resources :customers, only: :index
+  resources :customers, only: [ :index, :show ]
 end

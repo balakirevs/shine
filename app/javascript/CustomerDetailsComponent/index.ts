@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Http } from "@angular/http";
 import   template    from "./template.html";
 
 var CustomerDetailsComponent = Component({
@@ -7,18 +8,31 @@ var CustomerDetailsComponent = Component({
   template: template
 }).Class({
   constructor: [
-    ActivatedRoute,
-    function(activatedRoute) {
+    ActivatedRoute, Http,
+    function(activatedRoute, http) {
       this.activatedRoute = activatedRoute;
+      this.http = http;
       this.id = null;
+      this.customer = null;
     }
   ],
   ngOnInit: function() {
     var self = this;
-    self.activatedRoute.params.subscribe(function(params) {
-      var id = +params['id'];
-      self.id = id;
-    });
+    var observableFailed = function(response) {
+      alert(response);
+    };
+    var customerGetSuccess = function(response) {
+      self.customer = response.json().customer;
+    };
+    var routeSuccess = function(params) {
+      self.http.get(
+        "/customers/" + params["id"] + ".json"
+      ).subscribe(
+          customerGetSuccess,
+          observableFailed
+      );
+    };
+    self.activatedRoute.params.subscribe(routeSuccess, observableFailed);
   },
 });
 export { CustomerDetailsComponent };
