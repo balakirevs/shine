@@ -70819,44 +70819,14 @@ var MapSubscriber = (function (_super) {
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CustomerSearchComponent; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(29);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__(296);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__template_html__ = __webpack_require__(308);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__template_html___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__template_html__);
+
 
 
 var CustomerSearchComponent = Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
     selector: "shine-customer-search",
-    template: '\
-<header> \
-  <h1 class="h2">Customer Search</h1> \
-</header> \
-<section class="search-form"> \
-  <form> \
-    <label for="keywords" class="sr-only">Keywords></label> \
-    <input type="text" id="keywords" name="keywords" \
-           placeholder="First Name, Last Name, or Email Address"\
-           bind-ngModel="keywords" \
-           on-ngModelChange="search($event)" \
-           class="form-control input-lg">\
-  </form> \
-</section> \
-<section class="search-results" *ngIf="customers"> \
-  <header> \
-    <h1 class="h3">Results</h1> \
-  </header> \
-  <ol class="list-group"> \
-    <li *ngFor="let customer of customers" \
-      class="list-group-item clearfix"> \
-      <h3 class="pull-right"> \
-        <small class="text-uppercase">Joined</small> \
-        {{customer.created_at}} \
-      </h3> \
-      <h2 class="h3"> \
-        {{customer.first_name}} {{customer.last_name}} \
-        <small>{{customer.username}}</small> \
-      </h2> \
-      <h4>{{customer.email}}</h4> \
-    </li> \
-  </ol> \
-</section> \
-  '
+    template: __WEBPACK_IMPORTED_MODULE_2__template_html___default.a
 }).Class({
     constructor: [
         __WEBPACK_IMPORTED_MODULE_1__angular_http__["a" /* Http */],
@@ -70881,6 +70851,12 @@ var CustomerSearchComponent = Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__
 });
 
 
+
+/***/ }),
+/* 308 */
+/***/ (function(module, exports) {
+
+module.exports = "<header> <h1 class=\"h2\">Customer Search</h1> </header> <section class=\"search-form\"> <form> <label for=\"keywords\" class=\"sr-only\">Keywords</label> <input type=\"text\" id=\"keywords\" name=\"keywords\" placeholder=\"First Name, Last Name, or Email Address\" bind-ngModel=\"keywords\" on-ngModelChange=\"search($event)\" class=\"form-control input-lg\"> </form> </section> <section class=\"search-results\" *ngIf=\"customers\"> <header> <h1 class=\"h3\">Results</h1> </header> <ol class=\"list-group\"> <li *ngFor=\"let customer of customers\" class=\"list-group-item clearfix\"> <h3 class=\"pull-right\"> <small class=\"text-uppercase\">Joined</small> {{customer.created_at}} </h3> <h2 class=\"h3\"> {{customer.first_name}} {{customer.last_name}} <small>{{customer.username}}</small> </h2> <h4>{{customer.email}}</h4> </li> </ol> </section> ";
 
 /***/ })
 /******/ ]);
