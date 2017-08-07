@@ -44,6 +44,12 @@
   dependencies:
     tslib "^1.7.1"
 
+"@angular/router@^4.3.3":
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/@angular/router/-/router-4.3.3.tgz#f3f9004ec31b4fe4d15477e1e63e118df36ad46d"
+  dependencies:
+    tslib "^1.7.1"
+
 abbrev@1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/abbrev/-/abbrev-1.1.0.tgz#d0554c2256636e2f56e7c2e5ad183f859428d81f"
