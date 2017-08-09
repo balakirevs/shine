@@ -71132,6 +71132,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9_CustomerDetailsComponent_CustomerInfoComponent__ = __webpack_require__(331);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10_CustomerDetailsComponent_AddressComponent__ = __webpack_require__(333);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_11_CustomerDetailsComponent_CreditCardComponent__ = __webpack_require__(335);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12_TextFieldComponent__ = __webpack_require__(337);
+
 
 
 
@@ -71196,7 +71198,7 @@ var router = __WEBPACK_IMPORTED_MODULE_6__angular_router__["c" /* RouterModule *
 
 var CustomerAppModule = Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["M" /* NgModule */])({
   imports: [__WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["a" /* BrowserModule */], __WEBPACK_IMPORTED_MODULE_3__angular_forms__["a" /* FormsModule */], __WEBPACK_IMPORTED_MODULE_5__angular_http__["b" /* HttpModule */], router],
-  declarations: [__WEBPACK_IMPORTED_MODULE_7_CustomerSearchComponent__["a" /* CustomerSearchComponent */], __WEBPACK_IMPORTED_MODULE_8_CustomerDetailsComponent__["a" /* CustomerDetailsComponent */], __WEBPACK_IMPORTED_MODULE_9_CustomerDetailsComponent_CustomerInfoComponent__["a" /* CustomerInfoComponent */], __WEBPACK_IMPORTED_MODULE_10_CustomerDetailsComponent_AddressComponent__["a" /* AddressComponent */], __WEBPACK_IMPORTED_MODULE_11_CustomerDetailsComponent_CreditCardComponent__["a" /* CreditCardComponent */], AppComponent],
+  declarations: [__WEBPACK_IMPORTED_MODULE_7_CustomerSearchComponent__["a" /* CustomerSearchComponent */], __WEBPACK_IMPORTED_MODULE_8_CustomerDetailsComponent__["a" /* CustomerDetailsComponent */], __WEBPACK_IMPORTED_MODULE_9_CustomerDetailsComponent_CustomerInfoComponent__["a" /* CustomerInfoComponent */], __WEBPACK_IMPORTED_MODULE_10_CustomerDetailsComponent_AddressComponent__["a" /* AddressComponent */], __WEBPACK_IMPORTED_MODULE_11_CustomerDetailsComponent_CreditCardComponent__["a" /* CreditCardComponent */], __WEBPACK_IMPORTED_MODULE_12_TextFieldComponent__["a" /* TextFieldComponent */], AppComponent],
   bootstrap: [AppComponent]
 }).Class({
   constructor: function constructor() {}
@@ -79098,6 +79100,22 @@ var CustomerDetailsComponent = Object(__WEBPACK_IMPORTED_MODULE_0__angular_core_
         };
         self.activatedRoute.params.subscribe(routeSuccess, observableFailed);
     },
+    saveCustomerField: function (field_name, value) {
+        var update = {};
+        update[field_name] = value;
+        this.http.patch("/customers/" + this.customer.customer_id + ".json", update).subscribe(function () { }, function (response) {
+            window.alert(response);
+        });
+    },
+    saveCustomer: function (update) {
+        this.saveCustomerField(update.field_name, update.value);
+    },
+    saveShippingAddress: function (update) {
+        this.saveCustomerField("shipping_" + update.field_name, update.value);
+    },
+    saveBillingAddress: function (update) {
+        this.saveCustomerField("billing_" + update.field_name, update.value);
+    }
 });
 
 
@@ -79117,7 +79135,7 @@ Observable_1.Observable.prototype.map = map_1.map;
 /* 330 */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"customer-details\" *ngIf=\"customer\"> <form> <div class=\"row\"> <div class=\"col-md-6\"> <shine-customer-info bind-customer=\"customer\"> </shine-customer-info> <shine-address addressType=\"Shipping\" bind-address=\"customer.shipping_address\"> </shine-address> </div> <div class=\"col-md-6\"> <article class=\"panel panel-default\"> <header class=\"panel-heading\"> <h2 class=\"h4\"> Billing Info </h2> </header> <section class=\"panel-body\"> <shine-credit-card bind-cardholder_id=\"customer.cardholder_id\"> </shine-credit-card> <hr> <shine-address addressType=\"Billing\" bind-address=\"customer.billing_address\"> </shine-address> </section> </article> </div> </div> </form> </section>";
+module.exports = "<section class=\"customer-details\" *ngIf=\"customer\"> <form> <div class=\"row\"> <div class=\"col-md-6\"> <shine-customer-info bind-customer=\"customer\" on-customerInfoChanged=\"saveCustomer($event)\"> </shine-customer-info> <shine-address addressType=\"Shipping\" bind-address=\"customer.shipping_address\" on-addressChanged=\"saveShippingAddress($event)\"> </shine-address> </div> <div class=\"col-md-6\"> <article class=\"panel panel-default\"> <header class=\"panel-heading\"> <h2 class=\"h4\"> Billing Info </h2> </header> <section class=\"panel-body\"> <shine-credit-card bind-cardholder_id=\"customer.cardholder_id\"> </shine-credit-card> <hr> <shine-address addressType=\"Billing\" bind-address=\"customer.billing_address\" on-addressChanged=\"saveBillingAddress($event)\"> </shine-address> </section> </article> </div> </div> </form> </section>";
 
 /***/ }),
 /* 331 */
@@ -79132,14 +79150,23 @@ module.exports = "<section class=\"customer-details\" *ngIf=\"customer\"> <form>
 
 var CustomerInfoComponent = Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
     selector: "shine-customer-info",
-    inputs: ['customer'],
+    inputs: [
+        "customer"
+    ],
+    outputs: [
+        "customerInfoChanged"
+    ],
     template: __WEBPACK_IMPORTED_MODULE_1__CustomerInfoComponent_html___default.a
 }).Class({
     constructor: [
         function () {
             this.customer = null;
+            this.customerInfoChanged = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
         }
-    ]
+    ],
+    save: function (update) {
+        this.customerInfoChanged.emit(update);
+    }
 });
 
 
@@ -79148,7 +79175,7 @@ var CustomerInfoComponent = Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["
 /* 332 */
 /***/ (function(module, exports) {
 
-module.exports = "<article class=\"panel panel-primary\"> <header class=\"panel-heading\"> <h1 class=\"h3\"> Customer </h1> </header> <section class=\"panel-body\"> <div class=\"row\"> <div class=\"col-md-4\"> <div class=\"form-group\"> <label class=\"sr-only\" for=\"first-name\"> First Name </label> <input type=\"text\" class=\"form-control\" name=\"first-name\" bindon-ngModel=\"customer.first_name\"> </div> </div> <div class=\"col-md-4\"> <div class=\"form-group\"> <label class=\"sr-only\" for=\"last-name\">Last Name</label> <input type=\"text\" class=\"form-control\" name=\"last-name\" bindon-ngModel=\"customer.last_name\"> </div> </div> <div class=\"col-md-4\"> <div class=\"form-group\"> <label class=\"sr-only\" for=\"username\">Username</label> <div class=\"input-group\"> <div class=\"input-group-addon\">@</div> <input type=\"text\" class=\"form-control\" name=\"username\" bindon-ngModel=\"customer.username\"> </div> </div> </div> </div> <div class=\"form-group\"> <label class=\"sr-only\" for=\"email\">Email</label> <input type=\"text\" class=\"form-control\" name=\"email\" bindon-ngModel=\"customer.email\"> </div> </section> <footer class=\"panel-footer\"> <label for=\"joined\">Joined</label> {{customer.joined_at}} </footer> </article> ";
+module.exports = "<article class=\"panel panel-primary customer-info\" *ngIf=\"customer\"> <header class=\"panel-heading\"> <h1 class=\"h3\"> Customer </h1> </header> <section class=\"panel-body\"> <div class=\"row\"> <div class=\"col-md-4\"> <shine-text-field bind-object=\"customer\" field_name=\"first_name\" on-valueChanged=\"save($event)\" label=\"First Name\"> </shine-text-field> </div> <div class=\"col-md-4\"> <shine-text-field bind-object=\"customer\" field_name=\"last_name\" on-valueChanged=\"save($event)\" label=\"Last Name\"> </shine-text-field> </div> <div class=\"col-md-4\"> <shine-text-field addon=\"@\" bind-object=\"customer\" field_name=\"username\" on-valueChanged=\"save($event)\" label=\"Username\"> </shine-text-field> </div> </div> <div class=\"form-group\"> <shine-text-field bind-object=\"customer\" field_name=\"email\" on-valueChanged=\"save($event)\" label=\"Email\"> </shine-text-field> </div> </section> <footer class=\"panel-footer\"> <label for=\"joined\">Joined</label> {{customer.joined_at}} </footer> </article> ";
 
 /***/ }),
 /* 333 */
@@ -79163,15 +79190,25 @@ module.exports = "<article class=\"panel panel-primary\"> <header class=\"panel-
 
 var AddressComponent = Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
     selector: "shine-address",
-    inputs: ["address", "addressType"],
+    inputs: [
+        "address",
+        "addressType"
+    ],
+    outputs: [
+        "addressChanged"
+    ],
     template: __WEBPACK_IMPORTED_MODULE_1__AddressComponent_html___default.a
 }).Class({
     constructor: [
         function () {
             this.address = null;
             this.addressType = null;
+            this.addressChanged = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
         }
-    ]
+    ],
+    save: function (update) {
+        this.addressChanged.emit(update);
+    }
 });
 
 
@@ -79180,7 +79217,7 @@ var AddressComponent = Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /*
 /* 334 */
 /***/ (function(module, exports) {
 
-module.exports = "<article class=\"panel panel-default\"> <header class=\"panel-heading\"> <h2 class=\"h4\"> {{addressType}} Address </h2> </header> <section class=\"panel-body\"> <div class=\"form-group\"> <label class=\"sr-only\" for=\"street-address\"> Street Address </label> <input type=\"text\" class=\"form-control\" name=\"street-address\" bindon-ngModel=\"address.street\"> </div> <div class=\"row\"> <div class=\"col-md-6\"> <div class=\"form-group\"> <label class=\"sr-only\" for=\"city\">City</label> <input type=\"text\" class=\"form-control\" name=\"city\" bindon-ngModel=\"address.city\"> </div> </div> <div class=\"col-md-2\"> <div class=\"form-group\"> <label class=\"sr-only\" for=\"state\">State</label> <input type=\"text\" class=\"form-control\" name=\"state\" bindon-ngModel=\"address.state\"> </div> </div> <div class=\"col-md-4\"> <div class=\"form-group\"> <label class=\"sr-only\" for=\"zip\">Zip</label> <input type=\"text\" class=\"form-control\" name=\"zip\" bindon-ngModel=\"address.zipcode\"> </div> </div> </div> </section> </article>";
+module.exports = "<article class=\"panel panel-default {{addressType}}\"> <header class=\"panel-heading\"> <h2 class=\"h4\"> {{addressType}} Address </h2> </header> <section class=\"panel-body\"> <shine-text-field bind-object=\"address\" field_name=\"street\" on-valueChanged=\"save($event)\" label=\"Street\"> </shine-text-field> <div class=\"row\"> <div class=\"col-md-6\"> <shine-text-field bind-object=\"address\" field_name=\"city\" on-valueChanged=\"save($event)\" label=\"City\"> </shine-text-field> </div> <div class=\"col-md-2\"> <shine-text-field bind-object=\"address\" field_name=\"state\" on-valueChanged=\"save($event)\" compact=\"true\" label=\"State\"> </shine-text-field> </div> <div class=\"col-md-4\"> <shine-text-field bind-object=\"address\" field_name=\"zipcode\" on-valueChanged=\"save($event)\" pattern=\"\\d\\d\\d\\d\\d(-\\d\\d\\d\\d)?\" label=\"Zip Code\"> </shine-text-field> </div> </div> </section> </article>";
 
 /***/ }),
 /* 335 */
@@ -79237,6 +79274,83 @@ var CreditCardComponent = Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o"
 /***/ (function(module, exports) {
 
 module.exports = "<article class=\"credit-card-info\" *ngIf=\"credit_card_info\"> <div class=\"row\"> <div class=\"col-md-7\"> <p class=\"h4\"> ****-****-****-{{credit_card_info.last_four}} <span class=\"label label-success\">{{credit_card_info.type}}</span> </p> <p class=\"h5\"> <label>Expires:</label> {{credit_card_info.expiration_month}}/{{credit_card_info.expiration_year}} </p> </div> <div class=\"col-md-5 text-right\"> <a href=\"{{credit_card_info.link}}\" class=\"btn btn-lg btn-default\"> View Details... </a> </div> </div> </article> <aside class=\"progress\" *ngIf=\"!credit_card_info\"> <div class=\"progress-bar progress-bar-info progress-bar-striped active\" role=\"progressbar\" style=\"width:100%\"> Loading... </div> </aside>";
+
+/***/ }),
+/* 337 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return TextFieldComponent; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__template_html__ = __webpack_require__(338);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__template_html___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__template_html__);
+
+
+var TextFieldComponent = Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["o" /* Component */])({
+    selector: "shine-text-field",
+    template: __WEBPACK_IMPORTED_MODULE_1__template_html___default.a,
+    inputs: [
+        "object",
+        "field_name",
+        "label",
+        "pattern",
+        "compact",
+        "addon"
+    ],
+    outputs: [
+        "valueChanged"
+    ]
+}).Class({
+    constructor: [
+        function () {
+            this.object = null;
+            this.field_name = null;
+            this.label = null;
+            this.pattern = null;
+            this.compact = false;
+            this.addon = null;
+            this.valueChanged = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["x" /* EventEmitter */]();
+        }
+    ],
+    modelValid: function (model) {
+        return !(model.invalid && model.dirty);
+    },
+    validationPattern: function () {
+        if (this.pattern) {
+            return this.pattern;
+        }
+        else {
+            return "^.*$";
+        }
+    },
+    ngOnInit: function () {
+        if (this.object && this.field_name) {
+            this.originalValue = this.object[this.field_name];
+        }
+        else {
+            this.originalValue = null;
+        }
+    },
+    blur: function (model) {
+        if (this.modelValid(model)) {
+            if (this.originalValue != model.value) {
+                this.valueChanged.emit({
+                    field_name: this.field_name,
+                    value: model.value
+                });
+                this.originalValue = model.value;
+            }
+        }
+    }
+});
+
+
+
+/***/ }),
+/* 338 */
+/***/ (function(module, exports) {
+
+module.exports = "<div bind-class=\"modelValid(model) ?\n                  'form-group' : \n                  'form-group has-warning'\"> <label class=\"sr-only\" attr.for=\"{{field_name}}\"> {{label}} </label> <div bind-class=\"addon ? 'input-group' : ''\"> <div *ngIf=\"addon\" class=\"input-group-addon\">{{addon}}</div> <input type=\"text\" bind-class=\"( compact && !modelValid(model) ) ?\n                         'form-control alert-danger' :\n                         'form-control'\" attr.name=\"{{field_name}}\" required bind-pattern=\"validationPattern()\" bindon-ngModel=\"object[field_name]\" ref-model=\"ngModel\" on-blur=\"blur(model)\"> </div> <aside *ngIf=\"!compact && !modelValid(model)\" class=\"alert alert-danger\"> <small> <span *ngIf=\"pattern\">This is not a {{label}}</span> <span *ngIf=\"!pattern\">This is required</span> </small> </aside> </div> ";
 
 /***/ })
 /******/ ]);

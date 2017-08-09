@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'angular_rails_csrf'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise', '~> 4.3'
 gem 'faker'

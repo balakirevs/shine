@@ -12,6 +12,7 @@ import { CustomerDetailsComponent } from "CustomerDetailsComponent";
 import { CustomerInfoComponent    } from "CustomerDetailsComponent/CustomerInfoComponent";
 import { AddressComponent         } from "CustomerDetailsComponent/AddressComponent";
 import { CreditCardComponent      } from "CustomerDetailsComponent/CreditCardComponent";
+import { TextFieldComponent       } from "TextFieldComponent";
 
 var AppComponent = Component({
   selector: "shine-customers-app",
@@ -76,7 +77,7 @@ var router = RouterModule.forRoot(
 var CustomerAppModule = NgModule({
     imports:      [ BrowserModule, FormsModule, HttpModule, router ],
     declarations: [ CustomerSearchComponent, CustomerDetailsComponent, CustomerInfoComponent, AddressComponent,
-                    CreditCardComponent, AppComponent ],
+                    CreditCardComponent, TextFieldComponent, AppComponent ],
     bootstrap:    [ AppComponent ]
 })
 .Class({

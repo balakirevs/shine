@@ -40,6 +40,8 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.1)
       public_suffix (~> 2.0, >= 2.0.2)
+    angular_rails_csrf (2.1.1)
+      railties (>= 3, < 5.2)
     arel (8.0.0)
     bcrypt (3.1.11)
     bindex (0.5.0)
@@ -206,6 +208,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  angular_rails_csrf
   byebug
   coffee-rails (~> 4.2)
   database_cleaner
