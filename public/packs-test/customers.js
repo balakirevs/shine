@@ -79148,7 +79148,7 @@ Observable_1.Observable.prototype.map = map_1.map;
 /* 330 */
 /***/ (function(module, exports) {
 
-module.exports = "<section class=\"customer-details\" *ngIf=\"customer\"> <form> <div class=\"row\"> <div class=\"col-md-6\"> <shine-customer-info bind-customer=\"customer\" on-customerInfoChanged=\"saveCustomer($event)\"> </shine-customer-info> <shine-address addressType=\"Shipping\" bind-address=\"customer.shipping_address\" on-addressChanged=\"saveShippingAddress($event)\"> </shine-address> </div> <div class=\"col-md-6\"> <article class=\"panel panel-default\"> <header class=\"panel-heading\"> <h2 class=\"h4\"> Billing Info </h2> </header> <section class=\"panel-body\"> <shine-credit-card bind-cardholder_id=\"customer.cardholder_id\"> </shine-credit-card> <hr> <shine-address addressType=\"Billing\" bind-address=\"customer.billing_address\" on-addressChanged=\"saveBillingAddress($event)\"> </shine-address> </section> </article> </div> </div> </form> </section>";
+module.exports = "<section class=\"customer-details\" *ngIf=\"customer\"> <form> <div class=\"row\"> <div class=\"col-md-6\"> <shine-customer-info bind-customer=\"customer\" on-customerInfoChanged=\"saveCustomer($event)\"> </shine-customer-info> <shine-address addressType=\"Shipping\" icon=\"plane\" bind-address=\"customer.shipping_address\" on-addressChanged=\"saveShippingAddress($event)\"> </shine-address> </div> <div class=\"col-md-6\"> <article class=\"panel panel-default\"> <header class=\"panel-heading\"> <h2 class=\"h4\"> <i class=\"glyphicon glyphicon-credit-card\" aria-hidden=\"true\"></i> Billing Info </h2> </header> <section class=\"panel-body\"> <shine-credit-card bind-cardholder_id=\"customer.cardholder_id\"> </shine-credit-card> <hr> <shine-address addressType=\"Billing\" bind-address=\"customer.billing_address\" on-addressChanged=\"saveBillingAddress($event)\"> </shine-address> </section> </article> </div> </div> </form> </section>";
 
 /***/ }),
 /* 331 */
@@ -79188,7 +79188,7 @@ var CustomerInfoComponent = Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["
 /* 332 */
 /***/ (function(module, exports) {
 
-module.exports = "<article class=\"panel panel-primary customer-info\" *ngIf=\"customer\"> <header class=\"panel-heading\"> <h1 class=\"h3\"> Customer </h1> </header> <section class=\"panel-body\"> <div class=\"row\"> <div class=\"col-md-4\"> <shine-text-field bind-object=\"customer\" field_name=\"first_name\" on-valueChanged=\"save($event)\" label=\"First Name\"> </shine-text-field> </div> <div class=\"col-md-4\"> <shine-text-field bind-object=\"customer\" field_name=\"last_name\" on-valueChanged=\"save($event)\" label=\"Last Name\"> </shine-text-field> </div> <div class=\"col-md-4\"> <shine-text-field addon=\"@\" bind-object=\"customer\" field_name=\"username\" on-valueChanged=\"save($event)\" label=\"Username\"> </shine-text-field> </div> </div> <div class=\"form-group\"> <shine-text-field bind-object=\"customer\" field_name=\"email\" on-valueChanged=\"save($event)\" label=\"Email\"> </shine-text-field> </div> </section> <footer class=\"panel-footer\"> <label for=\"joined\">Joined</label> {{customer.joined_at | date | uppercase}} </footer> </article> ";
+module.exports = "<article class=\"panel panel-primary customer-info\" *ngIf=\"customer\"> <header class=\"panel-heading\"> <h1 class=\"h3\"> <i class=\"glyphicon glyphicon-user\" aria-hidden=\"true\"></i> Customer </h1> </header> <section class=\"panel-body\"> <div class=\"row\"> <div class=\"col-md-4\"> <shine-text-field bind-object=\"customer\" field_name=\"first_name\" on-valueChanged=\"save($event)\" label=\"First Name\"> </shine-text-field> </div> <div class=\"col-md-4\"> <shine-text-field bind-object=\"customer\" field_name=\"last_name\" on-valueChanged=\"save($event)\" label=\"Last Name\"> </shine-text-field> </div> <div class=\"col-md-4\"> <shine-text-field addon=\"@\" bind-object=\"customer\" field_name=\"username\" on-valueChanged=\"save($event)\" label=\"Username\"> </shine-text-field> </div> </div> <div class=\"form-group\"> <shine-text-field bind-object=\"customer\" field_name=\"email\" on-valueChanged=\"save($event)\" label=\"Email\"> </shine-text-field> </div> </section> <footer class=\"panel-footer\"> <label for=\"joined\">Joined</label> {{customer.joined_at | date}} </footer> </article> ";
 
 /***/ }),
 /* 333 */
@@ -79205,7 +79205,8 @@ var AddressComponent = Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /*
     selector: "shine-address",
     inputs: [
         "address",
-        "addressType"
+        "addressType",
+        "icon"
     ],
     outputs: [
         "addressChanged"
@@ -79216,6 +79217,7 @@ var AddressComponent = Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /*
         function () {
             this.address = null;
             this.addressType = null;
+            this.icon = "envelope";
             this.addressChanged = new __WEBPACK_IMPORTED_MODULE_0__angular_core__["y" /* EventEmitter */]();
         }
     ],
@@ -79230,7 +79232,7 @@ var AddressComponent = Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["p" /*
 /* 334 */
 /***/ (function(module, exports) {
 
-module.exports = "<article class=\"panel panel-default {{addressType}}\"> <header class=\"panel-heading\"> <h2 class=\"h4\"> {{addressType}} Address </h2> </header> <section class=\"panel-body\"> <shine-text-field bind-object=\"address\" field_name=\"street\" on-valueChanged=\"save($event)\" label=\"Street\"> </shine-text-field> <div class=\"row\"> <div class=\"col-md-6\"> <shine-text-field bind-object=\"address\" field_name=\"city\" on-valueChanged=\"save($event)\" label=\"City\"> </shine-text-field> </div> <div class=\"col-md-2\"> <shine-text-field bind-object=\"address\" field_name=\"state\" on-valueChanged=\"save($event)\" compact=\"true\" label=\"State\"> </shine-text-field> </div> <div class=\"col-md-4\"> <shine-text-field bind-object=\"address\" field_name=\"zipcode\" on-valueChanged=\"save($event)\" pattern=\"\\d\\d\\d\\d\\d(-\\d\\d\\d\\d)?\" label=\"Zip Code\"> </shine-text-field> </div> </div> </section> </article>";
+module.exports = "<article class=\"panel panel-default {{addressType}}\"> <header class=\"panel-heading\"> <h2 class=\"h4\"> <i class=\"glyphicon glyphicon-{{icon}}\" aria-hidden=\"true\"></i> {{addressType}} Address </h2> </header> <section class=\"panel-body\"> <shine-text-field bind-object=\"address\" field_name=\"street\" on-valueChanged=\"save($event)\" label=\"Street\"> </shine-text-field> <div class=\"row\"> <div class=\"col-md-6 col-xs-12\"> <shine-text-field bind-object=\"address\" field_name=\"city\" on-valueChanged=\"save($event)\" label=\"City\"> </shine-text-field> </div> <div class=\"col-md-2 col-xs-4\"> <shine-text-field bind-object=\"address\" field_name=\"state\" on-valueChanged=\"save($event)\" compact=\"true\" label=\"State\"> </shine-text-field> </div> <div class=\"col-md-4 col-xs-8\"> <shine-text-field bind-object=\"address\" field_name=\"zipcode\" on-valueChanged=\"save($event)\" pattern=\"\\d\\d\\d\\d\\d(-\\d\\d\\d\\d)?\" label=\"Zip Code\"> </shine-text-field> </div> </div> </section> </article>";
 
 /***/ }),
 /* 335 */
