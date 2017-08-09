@@ -42,6 +42,6 @@
     </div>
   </section>
   <footer class="panel-footer">
-    <label for="joined">Joined</label> {{customer.joined_at}}
+    <label for="joined">Joined</label> {{customer.joined_at | date | uppercase}}
   </footer>
 </article>
