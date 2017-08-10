@@ -1,11 +1,14 @@
 source 'https://rubygems.org'
 
+ruby '2.4.1'
+
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
   "https://github.com/#{repo_name}.git"
 end
 
 gem 'angular_rails_csrf'
+gem 'brakeman'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise', '~> 4.3'
 gem 'faker'
