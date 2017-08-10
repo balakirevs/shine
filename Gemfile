@@ -26,6 +26,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'poltergeist'
   gem 'rspec-rails', '~> 3.4'
+  gem 'shoulda-matchers'
 end
 
 group :development do
