@@ -3395,6 +3395,10 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
   dependencies:
     minimist "0.0.8"
 
+moment@2.18.1:
+  version "2.18.1"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
+
 ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
@@ -3431,6 +3435,16 @@ ncname@1.0.x:
 negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
+
+ngx-bootstrap@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/ngx-bootstrap/-/ngx-bootstrap-1.8.1.tgz#317c0fecf0a88248031b3f6102466ebf86658dfd"
+  dependencies:
+    moment "2.18.1"
+
+ngx-pagination@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-pagination/-/ngx-pagination-3.0.1.tgz#5a8000e40c0424d9c41c9d6d592562e1547abf24"
 
 no-case@^2.2.0:
   version "2.3.1"
