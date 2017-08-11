@@ -15,7 +15,7 @@
   <header>
     <h1 class="h3">Results</h1>
   </header>
-  <pagination-controls class="pager" (pageChange)="p = $event"></pagination-controls>
+  <pagination-controls class="pager" autoHide="true" (pageChange)="p = $event"></pagination-controls>
   <ol class="list-group">
     <li *ngFor="let customer of customers | paginate: { itemsPerPage: 10, currentPage: p }"
       class="list-group-item clearfix">
@@ -36,5 +36,5 @@
       <h4>{{customer.email}}</h4>
     </li>
   </ol>
-  <pagination-controls class="pager" (pageChange)="p = $event"></pagination-controls>
+  <pagination-controls class="pager" autoHide="true" (pageChange)="p = $event"></pagination-controls>
 </section>
