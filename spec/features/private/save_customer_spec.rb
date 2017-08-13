@@ -1,8 +1,6 @@
 require 'rails_helper'
-require_relative 'feature_support'
 
 feature 'search' do
-  include FeatureSupport
   let(:customer_attributes) do
     {
       first_name: Faker::Name.first_name,
@@ -53,18 +51,5 @@ feature 'search' do
         expect(page).to have_text('This is not a Zip Code')
       end
     end
-  end
-  def create_address
-    state = State.find_or_create_by!(
-      code: Faker::Address.state_abbr,
-      name: Faker::Address.state
-    )
-
-    Address.create!(
-      street: Faker::Address.street_address,
-      city: Faker::Address.city,
-      state: state,
-      zipcode: Faker::Address.zip
-    )
   end
 end

@@ -1,20 +1,6 @@
 require 'rails_helper'
 
 feature 'bootstrap' do
-  def sign_up_and_log_in
-    visit '/'
-    click_link 'Sign up'
-    email = "user#{rand(10_000)}@example.com"
-    fill_in 'Email', with: email
-    fill_in 'Password', with: 'qwertyuiop'
-    fill_in 'Password confirmation', with: 'qwertyuiop'
-    click_button 'Sign up'
-  end
-
-  def get_to_mockups_page
-    sign_up_and_log_in
-    visit '/bootstrap_mockups'
-  end
 
   scenario 'step one of our grid' do
     get_to_mockups_page

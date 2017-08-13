@@ -15,11 +15,7 @@ feature 'sign-in' do
     email = "user#{rand(10_000)}@example.com"
     password = 'qwertyuiop'
 
-    fill_in 'Email', with: email
-    fill_in 'Password', with: password
-    fill_in 'Password confirmation', with: password
-
-    click_button 'Sign up'
+    sign_up(email, password)
 
     within 'header' do
       expect(page).to have_content("Welcome to Shine, #{email}")
@@ -27,9 +23,7 @@ feature 'sign-in' do
 
     click_link 'Log Out'
 
-    fill_in 'Email', with: email
-    fill_in 'Password', with: password
-    click_button 'Log in'
+    log_in(email, password)
 
     within 'header' do
       expect(page).to have_content("Welcome to Shine, #{email}")
@@ -38,9 +32,7 @@ feature 'sign-in' do
 
   scenario 'we see an error when we fail login' do
     visit '/'
-    fill_in 'Email', with: 'foo'
-    fill_in 'Password', with: 'bar'
-    click_button 'Log in'
+    log_in('foo', 'bar')
 
     within 'aside' do
       expect(page).to have_content('Invalid Email or password')

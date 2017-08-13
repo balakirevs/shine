@@ -10,11 +10,7 @@ feature 'sign-up' do
 
     email = "user#{rand(10_000)}@example.com"
 
-    fill_in 'Email', with: email
-    fill_in 'Password', with: 'qwertyuiop'
-    fill_in 'Password confirmation', with: 'qwertyuiop'
-
-    click_button 'Sign up'
+    sign_up(email, 'qwertyuiop')
 
     within 'header' do
       expect(page).to have_content("Welcome to Shine, #{email}")

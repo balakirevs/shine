@@ -23,6 +23,7 @@ RSpec.configure do |config|
   config.include(EasyScreenshots, type: :feature)
 
   config.include(TestHelper)
+  config.include(FeatureSupport)
 
   Shoulda::Matchers.configure do |c|
     c.integrate do |with|
@@ -48,6 +49,11 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do
-    DatabaseCleaner.clean
+    begin
+      DatabaseCleaner.clean
+    rescue
+      sleep 1
+      DatabaseCleaner.clean
+    end
   end
 end

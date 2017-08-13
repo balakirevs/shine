@@ -84,7 +84,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 // layout file, like app/views/layouts/application.html.erb
 
 
-console.log('Hello World from Webpacker');
+if (false) console.log('Hello World from Webpacker');
 
 /***/ }),
 

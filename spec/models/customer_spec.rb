@@ -24,7 +24,7 @@ describe Customer, type: :model do
 
   describe '.primary_shipping_address' do
     it 'returns primary shipping address' do
-      customer = create_customer first_name: 'Pat', last_name: 'Jones', email: 'pat123@somewhere.net'
+      customer = create_customer first_name: 'Pat', last_name: 'Jones', username: 'pat123', email: 'pat123@somewhere.net'
       expect(customer.primary_shipping_address).to eq(customer.customers_shipping_address.find_by(primary: true).address)
     end
   end

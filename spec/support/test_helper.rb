@@ -7,8 +7,7 @@ module TestHelper
     )
   end
 
-  def create_customer(first_name:, last_name:, email: nil)
-    username = "#{Faker::Internet.user_name}#{rand(1000)}"
+  def create_customer(first_name:, last_name:, username:, email: nil)
     email  ||= "#{username}#{rand(1000)}@#{Faker::Internet.domain_name}"
 
     customer = Customer.create!(

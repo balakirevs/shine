@@ -1,18 +1,6 @@
 require 'rails_helper'
 
 feature 'customers search' do
-  def sign_up_and_log_in
-    visit '/'
-    click_link 'Sign up'
-    email = "user#{rand(10_000)}@example.com"
-    fill_in 'Email', with: email
-    fill_in 'Password', with: 'qwertyuiop'
-    fill_in 'Password confirmation', with: 'qwertyuiop'
-    click_button 'Sign up'
-    within 'header' do
-      expect(page).to have_content("Welcome to Shine, #{email}")
-    end
-  end
   scenario 'see the search form and sample results' do
     expiration_date = 4.years.from_now
     url = 'http://braintree.com/credit-cards/223adfasdfsd'
@@ -105,18 +93,5 @@ feature 'customers search' do
       end
       screenshot! filename: 'customer-search-done.png'
     end
-  end
-  def create_address
-    state = State.find_or_create_by!(
-      code: Faker::Address.state_abbr,
-      name: Faker::Address.state
-    )
-
-    Address.create!(
-      street: Faker::Address.street_address,
-      city: Faker::Address.city,
-      state: state,
-      zipcode: Faker::Address.zip
-    )
   end
 end
