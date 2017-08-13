@@ -56,4 +56,6 @@ RSpec.configure do |config|
       DatabaseCleaner.clean
     end
   end
+  config.before(:all) { DeferredGarbageCollection.start }
+  config.after(:all) { DeferredGarbageCollection.reconsider }
 end
