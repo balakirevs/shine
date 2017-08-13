@@ -1,5 +1,5 @@
 class CustomerSearchTerm
-  attr_reader :where_clause, :where_args, :order
+  attr_reader :where_clause, :where_args, :order, :first_term, :second_term
 
   def initialize(search_term)
     search_term = search_term.downcase
@@ -7,8 +7,10 @@ class CustomerSearchTerm
     @where_args = {}
     if search_term =~ /@/
       build_for_email_search(search_term)
-    else
+    elsif single_search_term?(search_term)
       build_for_name_search(search_term)
+    else
+      build_for_full_name_search(search_term)
     end
   end
 
@@ -19,7 +21,30 @@ class CustomerSearchTerm
     @where_args[:first_name] = starts_with(search_term)
     @where_clause << " OR #{case_insensitive_search(:last_name)}"
     @where_args[:last_name] = starts_with(search_term)
+    @where_clause << " OR #{case_insensitive_search(:username)}"
+    @where_args[:username] = starts_with(search_term)
     @order = 'last_name asc'
+  end
+
+  def build_for_full_name_search(search_term)
+    @first_term = truncate_first_term(search_term)
+    @second_term = truncate_second_term(search_term)
+    @where_clause << case_insensitive_search(:first_name)
+    @where_args[:first_name] = starts_with(@first_term)
+    @where_clause << " AND #{case_insensitive_search(:last_name)}"
+    @where_args[:last_name] = starts_with(@second_term)
+  end
+
+  def single_search_term?(search_term)
+    !search_term.strip.include? ' '
+  end
+
+  def truncate_first_term(search_term)
+    search_term.split(' ')[0..0].join(' ')
+  end
+
+  def truncate_second_term(search_term)
+    search_term.split(' ')[1..1].join(' ')
   end
 
   def starts_with(search_term)
