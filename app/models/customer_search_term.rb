@@ -29,10 +29,10 @@ class CustomerSearchTerm
   def build_for_full_name_search(search_term)
     @first_term = truncate_first_term(search_term)
     @second_term = truncate_second_term(search_term)
-    @where_clause << case_insensitive_search(:first_name)
-    @where_args[:first_name] = starts_with(@first_term)
-    @where_clause << " AND #{case_insensitive_search(:last_name)}"
-    @where_args[:last_name] = starts_with(@second_term)
+    @where_clause << case_insensitive_in_search(:first_name, @first_term, @second_term)
+    @where_args[:first_name] = @first_term
+    @where_clause << " AND (#{case_insensitive_in_search(:last_name, @first_term, @second_term)})"
+    @where_args[:last_name] = @second_term
   end
 
   def single_search_term?(search_term)
@@ -53,6 +53,10 @@ class CustomerSearchTerm
 
   def case_insensitive_search(field_name)
     "lower(#{field_name}) like :#{field_name}"
+  end
+
+  def case_insensitive_in_search(field_name, args1, args2)
+    "lower(#{field_name}) in ('#{args1}', '#{args2}')"
   end
 
   def extract_name(email)
